@@ -1,0 +1,18 @@
+.home {
+    &-title {
+        font-size: 2rem;
+    }
+
+    &-main {
+        display: flex;
+        height: 50vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &-title {
+        font-size: 1.5rem;
+    }
+}

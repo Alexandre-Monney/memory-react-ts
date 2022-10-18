@@ -9,8 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.10",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-progress-bar-timer": "^0.3.4",
+    "react-router-dom": "^6.4.2",
+    "sass": "^1.55.0",
+    "use-timer": "^2.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
