@@ -11,10 +11,13 @@ import { CardType, newBoard } from '../../data/cards';
 
 import Card from '../Card/Card';
 
+// Durée de mon timer, et de mon setTimeout pour la fin du jeu
+const durationTimer: number = 90;
+
 const Board: React.FC = (): JSX.Element => {
   // Timer pour la durée du jeu
   const { time, start, pause, reset, status } = useTimer({
-    initialTime: 90,
+    initialTime: durationTimer,
     timerType: 'DECREMENTAL',
   });
   // Récupération de mon tableau de cartes mélangées
@@ -24,9 +27,10 @@ const Board: React.FC = (): JSX.Element => {
   const [firstCardFlipped, setFirstCardFlipped] = useState<null | CardType>(null);
   const [secondCardFlipped, setSecondCardFlipped] = useState<null | CardType>(null);
   const [disableFlip, setDisableFlip] = useState<boolean>(false);
-  const [matchedCard, setMatchedCard] = useState<number>(0);
+  const [matchedCard, setMatchedCard] = useState<number>(1);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [modalMessage, setModalMessage] = useState<string>('');
+  const [counter, setCounter] = useState<number>(1);
 
   // Initialisation de mon plateau de jeu
   const newGame = (): void => {
@@ -37,18 +41,18 @@ const Board: React.FC = (): JSX.Element => {
 
     // Je n'ai pas trouvé, comment déclencher une fonction a la fin de mon timer.
     // Solution moins "propre", mais qui fonctionne cependant
-    // setTimeout(() => {
-    //   pause();
-    //   setOpenModal(true);
-    //   setModalMessage('Aie ! Temps expiré, dommage');
-    // }, 90000);
+    setTimeout(() => {
+      pause();
+      setOpenModal(true);
+      setModalMessage('Aie ! Temps expiré, dommage');
+    }, durationTimer * 1000);
   };
 
   // Fonction pour vérifier si la partie est gagnée, et si c'est le cas, affichage de la modale avec le message
   const isGameWon = (): void => {
-    if (matchedCard === 5) {
+    if (matchedCard === 6) {
       pause();
-      setModalMessage(`Bravo tu as gagné, il restait ${time} secondes`);
+      setModalMessage(`Bravo tu as gagné en ${counter} coups, et te restait ${time} secondes`);
       setOpenModal(true);
     }
   };
@@ -85,13 +89,15 @@ const Board: React.FC = (): JSX.Element => {
   // Je test si elles ont toutes été trouvées, et ensuite je reset les states des cartes retournées
   useEffect(() => {
     if (firstCardFlipped && secondCardFlipped) {
+      setCounter((prev) => prev + 1);
       setDisableFlip(true);
+      console.log(counter);
       if (firstCardFlipped.name === secondCardFlipped.name) {
         setMatchedCard((prev) => prev + 1);
 
+        resetFlippedCard();
         isGameWon();
         updateMatchedCards();
-        resetFlippedCard();
       } else {
         resetFlippedCard();
       }
