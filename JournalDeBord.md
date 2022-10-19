@@ -21,4 +21,6 @@ Journal de bord de mon test technique en React & TypeScript
 - Je me suis rendu compte que j'avais un timer, mais pas de progress bar. J'ai donc cherché le moyen le plus simple pour en implémenter une.
 - Je vais pouvoir commencer a me pencher sur les tests. Histoire d'en avoir quelques uns de fonctionnels par composant
 - Je n'avais vu que trés rapidement en cours, le principe des tests, mais succintement ! On regarde donc un peu de document, et je commence a m'y mettre. Tout ce que j'apprends la, ça ne sera jamais perdu.
-- J'ai mis en place des premiers petits tests tout simple. Mais qui ont le mérite de fonctionner. Je vais essayer de faire un ou deux plus conséquent, sur un composant react entier
+- J'ai mis en place des premiers petits tests tout simple. Mais qui ont le mérite de fonctionner. Je vais essayer de faire un ou deux plus conséquent, sur un composant react entier.
+- Quelques tests ont été mis en place, mais j'ai besoin de travailler et d'apprendre beaucoup plus sur leurs réalisation. Je veux rester dans un rapport temps/rendu relativement correct, et pas m'éparpiller pour au final pas avoir de gros changements.
+- Petite pause, puis relecture du code, tentative de ranger ou de rendre le code un peu plus compréhensible. Je dois travailler sur rendre les composants plus simple. Je pense retoucher encore 2, 3 petites choses avant de m'arreter sur ce projet.

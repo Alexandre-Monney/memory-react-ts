@@ -8,7 +8,7 @@ type Props = {
   handleFlip: (arg0: CardType) => void;
   disableFlip: boolean;
 };
-const Card: React.FC<Props> = ({ card, handleFlip, flipped, disableFlip }): JSX.Element => {
+export const Card: React.FC<Props> = ({ card, handleFlip, flipped, disableFlip }): JSX.Element => {
   const handleClick = (): void => {
     if (disableFlip) return;
     handleFlip(card);
