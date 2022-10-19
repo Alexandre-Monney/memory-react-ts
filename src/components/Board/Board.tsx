@@ -10,6 +10,7 @@ import { useTimer } from 'use-timer';
 import { CardType, newBoard } from '../../data/cards';
 
 import Card from '../Card/Card';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 // Durée de mon timer, et de mon setTimeout pour la fin du jeu
 const durationTimer: number = 90;
@@ -23,6 +24,7 @@ const Board: React.FC = (): JSX.Element => {
   // Récupération de mon tableau de cartes mélangées
   const cards: Array<CardType> = newBoard();
 
+  // Initialisation de mes states
   const [boardCards, setBoardCards] = useState<any[] | Array<CardType>>([]);
   const [firstCardFlipped, setFirstCardFlipped] = useState<null | CardType>(null);
   const [secondCardFlipped, setSecondCardFlipped] = useState<null | CardType>(null);
@@ -31,6 +33,7 @@ const Board: React.FC = (): JSX.Element => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [modalMessage, setModalMessage] = useState<string>('');
   const [counter, setCounter] = useState<number>(1);
+  const [gameEnded, setGameEnded] = useState<boolean>(false);
 
   // Initialisation de mon plateau de jeu
   const newGame = (): void => {
@@ -52,6 +55,7 @@ const Board: React.FC = (): JSX.Element => {
   const isGameWon = (): void => {
     if (matchedCard === 6) {
       pause();
+      setGameEnded(true);
       setModalMessage(`Bravo tu as gagné en ${counter} coups, et te restait ${time} secondes`);
       setOpenModal(true);
     }
@@ -129,6 +133,7 @@ const Board: React.FC = (): JSX.Element => {
         </div>
       </div>
       {/* Affichage du temps restant grace au timer */}
+      <ProgressBar ended={gameEnded} />
       <p className='timer'>Temps Restant : {time}</p>
       {/* Boite de dialogue indiquant la fin de la partie, soit par victoire, soit par temps expiré */}
       <Modal centered show={openModal}>
