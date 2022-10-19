@@ -1,16 +1,9 @@
 .board {
-    width: 80%;
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-
+    width: 90%;
     border: 1px solid #DEDEDE;
     border-radius: 3px;
     box-shadow: 0 0 3px 3px #DEDEDE;
-    
-    padding: 1rem;
+    padding: 0.5rem;
     margin: 1rem auto;
 }
 .timer {

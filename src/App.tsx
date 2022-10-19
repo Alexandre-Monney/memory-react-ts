@@ -3,7 +3,7 @@ import './App.scss';
 import Board from './components/Board/Board';
 import Home from './components/Home/Home';
 
-function App() {
+function App(): JSX.Element {
   return (
     <div id='app'>
       <Routes>

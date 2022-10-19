@@ -1,37 +1,35 @@
 // Styles
 import './Board.scss';
-// Material Ui, pour dialog modale principalement
-import { Dialog, DialogTitle, DialogActions, Button } from '@mui/material';
+// Import pour la modal de fin de jeu
+import { Modal, Button } from 'react-bootstrap';
 // Modules npm
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTimer } from 'use-timer';
 // Fonction de création de mon tableau mélangé de cartes
-import { newBoard } from '../../data/cards';
+import { CardType, newBoard } from '../../data/cards';
 
 import Card from '../Card/Card';
 
-type Props = {};
-
-const Board = () => {
+const Board: React.FC = (): JSX.Element => {
   // Timer pour la durée du jeu
   const { time, start, pause, reset, status } = useTimer({
     initialTime: 90,
     timerType: 'DECREMENTAL',
   });
   // Récupération de mon tableau de cartes mélangées
-  const cards = newBoard();
+  const cards: Array<CardType> = newBoard();
 
-  const [boardCards, setBoardCards] = useState([]);
-  const [firstCardFlipped, setFirstCardFlipped] = useState(null);
-  const [secondCardFlipped, setSecondCardFlipped] = useState(null);
-  const [disableFlip, setDisableFlip] = useState(false);
-  const [matchedCard, setMatchedCard] = useState(0);
-  const [openModal, setOpenModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
+  const [boardCards, setBoardCards] = useState<any[] | Array<CardType>>([]);
+  const [firstCardFlipped, setFirstCardFlipped] = useState<null | CardType>(null);
+  const [secondCardFlipped, setSecondCardFlipped] = useState<null | CardType>(null);
+  const [disableFlip, setDisableFlip] = useState<boolean>(false);
+  const [matchedCard, setMatchedCard] = useState<number>(0);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [modalMessage, setModalMessage] = useState<string>('');
 
   // Initialisation de mon plateau de jeu
-  const newGame = () => {
+  const newGame = (): void => {
     // Demarrage du Timer
     start();
     // je mets mon tableau de cartes mélangées dans le state
@@ -39,25 +37,24 @@ const Board = () => {
 
     // Je n'ai pas trouvé, comment déclencher une fonction a la fin de mon timer.
     // Solution moins "propre", mais qui fonctionne cependant
-    setTimeout(() => {
-      pause();
-      setOpenModal(true);
-      setModalMessage('Aie ! Temps expiré, dommage');
-    }, 90000);
+    // setTimeout(() => {
+    //   pause();
+    //   setOpenModal(true);
+    //   setModalMessage('Aie ! Temps expiré, dommage');
+    // }, 90000);
   };
 
   // Fonction pour vérifier si la partie est gagnée, et si c'est le cas, affichage de la modale avec le message
-  const isGameWon = () => {
+  const isGameWon = (): void => {
     if (matchedCard === 5) {
       pause();
-      const timeleft = 90 - time;
-      setModalMessage(`Bravo tu as gagné, il restait ${timeleft} secondes`);
+      setModalMessage(`Bravo tu as gagné, il restait ${time} secondes`);
       setOpenModal(true);
     }
   };
 
   // Fonction qui reinitialise les etats des deux cartes retournées, si elles n'ont pas match
-  const resetFlippedCard = () => {
+  const resetFlippedCard = (): void => {
     setTimeout(() => {
       setFirstCardFlipped(null);
       setSecondCardFlipped(null);
@@ -66,10 +63,10 @@ const Board = () => {
   };
 
   // Je modifie la propriété matched a true, pour les cartes qui ont matchs, et je les retourne dans le state du board
-  const updateMatchedCards = () => {
+  const updateMatchedCards = (): void => {
     setBoardCards((prev) => {
       return prev.map((card) => {
-        if (card.name === firstCardFlipped.name) {
+        if (card.name === firstCardFlipped?.name) {
           return { ...card, matched: true };
         } else {
           return card;
@@ -102,38 +99,40 @@ const Board = () => {
   }, [firstCardFlipped, secondCardFlipped]);
 
   // Fonction qui set le state soit de la 1ere carte retournée, soit de la 2nde selon si la 1ere existe ou non
-  const handleFlip = (card) => {
+  const handleFlip = (card: CardType): void => {
     firstCardFlipped ? setSecondCardFlipped(card) : setFirstCardFlipped(card);
   };
 
   return (
     <>
-      <div className='board'>
-        {/* Je map pour avoir autant de carte, qu'il y en a dans mon tableau de cartes */}
-        {boardCards.map((card) => (
-          <Card
-            key={card.id}
-            card={card}
-            handleFlip={handleFlip}
-            // Triple condition pour avoir le statut de carte retournée, soit c'est la premiere carte cliquéé
-            // Soit c'est la seconde carte cliquée
-            // Et enfin, si la propriété de la carte "matched" est a true
-            flipped={card === firstCardFlipped || card === secondCardFlipped || card.matched}
-            disableFlip={disableFlip}
-          />
-        ))}
+      <div className='board container-md-fluid'>
+        <div className='row row-cols-4 justify-content-center'>
+          {/* Je map pour avoir autant de carte, qu'il y en a dans mon tableau de cartes */}
+          {boardCards.map((card) => (
+            <Card
+              key={card.id}
+              card={card}
+              handleFlip={handleFlip}
+              // Triple condition pour avoir le statut de carte retournée, soit c'est la premiere carte cliquéé
+              // Soit c'est la seconde carte cliquée
+              // Et enfin, si la propriété de la carte "matched" est a true
+              flipped={card === firstCardFlipped || card === secondCardFlipped || card.matched}
+              disableFlip={disableFlip}
+            />
+          ))}
+        </div>
       </div>
       {/* Affichage du temps restant grace au timer */}
       <p className='timer'>Temps Restant : {time}</p>
       {/* Boite de dialogue indiquant la fin de la partie, soit par victoire, soit par temps expiré */}
-      <Dialog open={openModal}>
-        <DialogTitle>{modalMessage}</DialogTitle>
-        <DialogActions>
+      <Modal centered show={openModal}>
+        <Modal.Header>{modalMessage}</Modal.Header>
+        <Modal.Footer>
           <Link to='/'>
-            <Button>Rejouer ?</Button>
+            <Button variant='primary'>Rejouer ?</Button>
           </Link>
-        </DialogActions>
-      </Dialog>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

@@ -5,14 +5,15 @@ import card4 from '../assets/images/img4.png';
 import card5 from '../assets/images/img5.png';
 import card6 from '../assets/images/img6.png';
 
-import shuffleArray from '../utils/shuffle.tsx';
+import shuffleArray from '../utils/shuffle';
 
-// export type CardType = {
-//   id: number,
-//   image: string,
-// };
+export interface CardType {
+  image: string;
+  matched: boolean;
+  name: string;
+}
 
-const originalCards = [
+const originalCards: Array<CardType> = [
   {
     image: card1,
     matched: false,
@@ -45,9 +46,9 @@ const originalCards = [
   },
 ];
 
-const board = [...originalCards, ...originalCards];
+const board: Array<CardType> = [...originalCards, ...originalCards];
 
-export const newBoard = () => {
+export const newBoard = (): any[] => {
   const shuffledBoard = shuffleArray(board);
   return shuffledBoard.map((card, index) => ({
     id: index + 1,

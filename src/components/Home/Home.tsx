@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import './Home.scss';
+import { Button } from 'react-bootstrap';
 
-type Props = {};
-const Home = (props: Props) => {
+const Home: React.FC = (): JSX.Element => {
   return (
     <div className='home'>
       <header>
-        <h2 className='home-title'>Jouez au Memory Game sur le thème de Star Wars !</h2>
+        <h2 className='fs-1 text-danger'>Jouez au Memory Game sur le thème de Star Wars !</h2>
       </header>
       <main className='home-main'>
-        <div className='home-title'>Nouvelle Partie ?</div>
+        <div className='fs-3 text-primary'>Nouvelle Partie ?</div>
         <Link to='/memory'>
-          <button>Jouer</button>
+          <Button variant='primary'>Jouer</Button>
         </Link>
       </main>
     </div>
