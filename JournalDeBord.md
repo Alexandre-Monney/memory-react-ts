@@ -20,3 +20,5 @@ Journal de bord de mon test technique en React & TypeScript
 - Finalement, la migration vers TypeScript s'est relativement bien passé. Contrairement a ce que je pensais, c'est intuitif. J'ai du regarder sur internet comment typer certaines choses, mais dans l'ensemble, ça me parait correct. Avec un peu de pratique et d'entrainement, ça deviendra naturel, j'aime beaucoup le fait de typer fortement tout dans nos fichiers.
 - Je me suis rendu compte que j'avais un timer, mais pas de progress bar. J'ai donc cherché le moyen le plus simple pour en implémenter une.
 - Je vais pouvoir commencer a me pencher sur les tests. Histoire d'en avoir quelques uns de fonctionnels par composant
+- Je n'avais vu que trés rapidement en cours, le principe des tests, mais succintement ! On regarde donc un peu de document, et je commence a m'y mettre. Tout ce que j'apprends la, ça ne sera jamais perdu.
+- J'ai mis en place des premiers petits tests tout simple. Mais qui ont le mérite de fonctionner. Je vais essayer de faire un ou deux plus conséquent, sur un composant react entier

@@ -48,8 +48,8 @@ const originalCards: Array<CardType> = [
 
 const board: Array<CardType> = [...originalCards, ...originalCards];
 
-export const newBoard = (): any[] => {
-  const shuffledBoard = shuffleArray(board);
+export const newBoard = (array: Array<CardType> = board): any[] => {
+  const shuffledBoard = shuffleArray(array);
   return shuffledBoard.map((card, index) => ({
     id: index + 1,
     ...card,
