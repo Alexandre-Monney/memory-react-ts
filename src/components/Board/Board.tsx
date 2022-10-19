@@ -47,6 +47,7 @@ const Board: React.FC = (): JSX.Element => {
     setTimeout(() => {
       pause();
       setOpenModal(true);
+      setGameEnded(true);
       setModalMessage('Aie ! Temps expiré, dommage');
     }, durationTimer * 1000);
   };
