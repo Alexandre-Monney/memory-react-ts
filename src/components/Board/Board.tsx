@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { useTimer } from 'use-timer';
 // Fonction de création de mon tableau mélangé de cartes
 import { CardType, newBoard } from '../../data/cards';
-
+// Import composants perso
 import Card from '../Card/Card';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
@@ -42,7 +42,7 @@ const Board: React.FC = (): JSX.Element => {
     // je mets mon tableau de cartes mélangées dans le state
     setBoardCards(cards);
 
-    // Je n'ai pas trouvé, comment déclencher une fonction a la fin de mon timer.
+    // Je n'ai pas trouvé, comment déclencher une fonction a la fin de mon timer sans passer par un setTimeout en plus.
     // Solution moins "propre", mais qui fonctionne cependant
     setTimeout(() => {
       pause();
@@ -57,12 +57,12 @@ const Board: React.FC = (): JSX.Element => {
     if (matchedCard === 6) {
       pause();
       setGameEnded(true);
-      setModalMessage(`Bravo tu as gagné en ${counter} coups, et te restait ${time} secondes`);
+      setModalMessage(`Bravo tu as gagné en ${counter} coups, et il te restait ${time} secondes`);
       setOpenModal(true);
     }
   };
 
-  // Fonction qui reinitialise les etats des deux cartes retournées, si elles n'ont pas match
+  // Fonction qui reinitialise les etats des deux cartes retournées
   const resetFlippedCard = (): void => {
     setTimeout(() => {
       setFirstCardFlipped(null);
@@ -71,7 +71,8 @@ const Board: React.FC = (): JSX.Element => {
     }, 1000);
   };
 
-  // Je modifie la propriété matched a true, pour les cartes qui ont matchs, et je les retourne dans le state du board
+  // Je modifie la propriété matched a true, pour les cartes qui ont matchs, et je met à jour le state du board
+  // avec le nouveau tableau
   const updateMatchedCards = (): void => {
     setBoardCards((prev) => {
       return prev.map((card) => {
@@ -89,20 +90,19 @@ const Board: React.FC = (): JSX.Element => {
     newGame();
   }, []);
 
-  // Component Did Update pour vérification si les deux cartes ont été retournées,
-  // si elles sont de paires ou pas. Si c'est le cas, j'incrémente le compteur des cartes trouvées
+  // Component Did Update pour vérification si deux cartes ont été retournées,
+  // Puis, vérification du match. Si c'est le cas, j'incrémente le compteur des cartes trouvées
   // Je test si elles ont toutes été trouvées, et ensuite je reset les states des cartes retournées
   useEffect(() => {
     if (firstCardFlipped && secondCardFlipped) {
       setCounter((prev) => prev + 1);
+      // Je désactive la possibilité de retourner d'autres cartes pendant la vérification du match
       setDisableFlip(true);
-      console.log(counter);
       if (firstCardFlipped.name === secondCardFlipped.name) {
         setMatchedCard((prev) => prev + 1);
-
-        resetFlippedCard();
-        isGameWon();
         updateMatchedCards();
+        isGameWon();
+        resetFlippedCard();
       } else {
         resetFlippedCard();
       }

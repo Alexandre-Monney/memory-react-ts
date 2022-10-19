@@ -46,8 +46,10 @@ const originalCards: Array<CardType> = [
   },
 ];
 
+// Creation d'un tableau avec chaque carte en double, pour faire des paires
 const board: Array<CardType> = [...originalCards, ...originalCards];
 
+// Fonction qui renvoie une copie du tableau d'entree, avec ajout d'un id sur chaque carte (pour la key)
 export const newBoard = (array: Array<CardType> = board): any[] => {
   const shuffledBoard = shuffleArray(array);
   return shuffledBoard.map((card, index) => ({

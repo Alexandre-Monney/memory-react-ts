@@ -1,8 +1,8 @@
 import { describe, test, expect } from 'vitest';
-import { newBoard } from './cards';
+import { CardType, newBoard } from './cards';
 
 describe('new Board testing function', () => {
-  const arrayTesting = [
+  const arrayTesting: Array<CardType> = [
     {
       image: 'test',
       matched: false,
@@ -18,8 +18,8 @@ describe('new Board testing function', () => {
     expect(Array.isArray(newBoard(arrayTesting))).toBe(true);
   });
   test('Should have a new id property', () => {
-    const testBoard = newBoard(arrayTesting);
-    const idProperty = testBoard[0].id;
+    const testBoard: any[] = newBoard(arrayTesting);
+    const idProperty: number = testBoard[0].id;
     expect(idProperty).toBe(1);
   });
 });

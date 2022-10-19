@@ -5,7 +5,7 @@ const useProgress = (maxTimeInSeconds: number = 900): number => {
   const [elapsedTime, setElapsedTime] = useState<number>(0);
 
   useEffect(() => {
-    const intervalId: number = setInterval(() => {
+    const intervalId = setInterval(() => {
       if (progress < 1) {
         setElapsedTime((prev) => prev + 1);
       }

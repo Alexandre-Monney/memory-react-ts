@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import './Home.scss';
 import { Button } from 'react-bootstrap';
+import './Home.scss';
 
 const Home: React.FC = (): JSX.Element => {
   return (
@@ -9,9 +9,8 @@ const Home: React.FC = (): JSX.Element => {
         <h2 className='fs-1 text-danger'>Jouez au Memory Game sur le thème de Star Wars !</h2>
       </header>
       <main className='home-main'>
-        <div className='fs-3 text-primary'>Nouvelle Partie ?</div>
         <Link to='/memory'>
-          <Button variant='primary'>Jouer</Button>
+          <Button variant='primary'>Pret ?</Button>
         </Link>
       </main>
     </div>
