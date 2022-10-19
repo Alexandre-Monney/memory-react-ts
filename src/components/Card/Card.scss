@@ -2,12 +2,14 @@
     cursor: pointer;
     position: relative;
     margin: 2rem 0;
+    max-height: 20vh;
 }
 
 .card-container .card-front {
     transform: rotateY(90deg);
     transition: all ease-in 0.2s;
     position: absolute;
+    height: 100%;
 }
 
 .flipped .card-front{
@@ -22,6 +24,8 @@
     box-shadow: 0 0 3px 3px #DEDEDE;
     transition: all ease-in 0.2s;
     transition-delay: 0.2s ;
+    height: 100%;
+
 }
 
 .flipped .card-back {
