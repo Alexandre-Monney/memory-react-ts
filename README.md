@@ -1,5 +1,11 @@
 # Memory-react-ts
 
+**Voir le détail du déroulement de mon projet** : [Journal de bord](./JournalDeBord.md)
+
+**Aperçu du projet en ligne** : [Demo](https://am-memory.surge.sh)
+
+## Installer le projet :
+
 Clone App :  
 `git clone git@github.com:Alexandre-Monney/memory-react-ts.git`
 
